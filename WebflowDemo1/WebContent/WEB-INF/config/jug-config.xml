@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="toppings" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>Pepperoni</value>
+				<value>Sausage</value>
+				<value>Extra Cheese</value>
+				<value>Mushrooms</value>
+				<value>Pineapple</value>
+				<value>Canadian Sausage</value>
+				<value>Peppers</value>
+				<value>Anchovies</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="stateCodeList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value> </value>
+				<value>AL</value>
+				<value>AK</value>
+				<value>AZ</value>
+				<value>AR</value>
+				<value>CA</value>
+				<value>CO</value>
+				<value>CT</value>
+				<value>DE</value>
+				<value>DC</value>
+				<value>FL</value>
+				<value>GA</value>
+				<value>HI</value>
+				<value>ID</value>
+				<value>IL</value>
+				<value>IN</value>
+				<value>IA</value>
+				<value>KS</value>
+				<value>KY</value>
+				<value>LA</value>
+				<value>ME</value>
+				<value>MD</value>
+				<value>MA</value>
+				<value>MI</value>
+				<value>MN</value>
+				<value>MS</value>
+				<value>MO</value>
+				<value>MT</value>
+				<value>NE</value>
+				<value>NV</value>
+				<value>NH</value>
+				<value>NJ</value>
+				<value>NM</value>
+				<value>NY</value>
+				<value>NC</value>
+				<value>ND</value>
+				<value>OH</value>
+				<value>OK</value>
+				<value>OR</value>
+				<value>PA</value>
+				<value>RI</value>
+				<value>SC</value>
+				<value>SD</value>
+				<value>TN</value>
+				<value>TX</value>
+				<value>UT</value>
+				<value>VT</value>
+				<value>VA</value>
+				<value>WA</value>
+				<value>WV</value>
+				<value>WI</value>
+				<value>WY</value>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

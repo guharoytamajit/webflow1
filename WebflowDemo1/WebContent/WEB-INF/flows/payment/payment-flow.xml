@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/webflow
+http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	<input name="flow" />
+
+	<view-state id="selectPaymentType">
+		<transition on="creditCard" to="creditCardPayment" />
+		<transition on="check" to="eCheckPayment" />
+		<transition on="cancel" to="cancel" />
+	</view-state>
+
+	<view-state id="creditCardPayment" model="payment">
+		<on-entry>
+			<evaluate expression="paymentService.generateCreditCardPayment(flow.getOrder())"
+				result="flowScope.payment" />
+		</on-entry>
+		<transition on="submitPayment" to="paymentSuccessful" />
+		<transition on="cancel" to="selectPaymentType" validate="false" />
+	</view-state>
+
+	<view-state id="eCheckPayment" model="payment">
+		<on-entry>
+			<evaluate
+				expression="paymentService.generateElectronicCheckPayment(flow.getOrder())"
+				result="flowScope.payment" />
+		</on-entry>
+		<transition on="submitPayment" to="paymentSuccessful" />
+		<transition on="cancel" to="selectPaymentType" validate="false" />
+	</view-state>
+
+
+	<!-- <action-state id="processPayment"> 
+		<evaluate expression="evaluatePayment()" />
+		<transition on="yes" to="paymentSuccessful" />
+		<transition on="no" to="payment" />
+	</action-state>
+	 --> 
+
+	<end-state id="paymentSuccessful" />
+	<end-state id="cancel" />
+</flow>

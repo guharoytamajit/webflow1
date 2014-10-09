@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/webflow
+http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+
+	<secured attributes="ROLE_USER" />
+
+	<!-- Actions -->
+	<!-- This flow now creates a Flow object in flow scope when it starts -->
+	<on-start>
+		<evaluate expression="new com.webflow.model.Flow()" result="flowScope.flow" />
+	</on-start>
+
+	<view-state id="home" model="flow">
+		<on-entry>
+			<evaluate expression="new com.webflow.model.Flow()" result="flowScope.flow" />
+		</on-entry>
+		<transition on="next" to="orderPizza" />
+	</view-state>
+
+	<view-state id="orderPizza" model="flow">
+		<on-entry>
+			<evaluate expression="T(com.webflow.model.PizzaSize).values()"
+				result="viewScope.pizzaSizes" />
+			<set name="viewScope.toppings" value="toppings" />
+		</on-entry>
+		<transition on="next" to="name" />
+		<transition on="back" to="home" validate="false" />
+	</view-state>
+
+
+	<view-state id="name" view="cust_name.jsp" model="flow">
+		<transition on="next" to="address" />
+		<transition on="back" to="orderPizza" validate="false" />
+	</view-state>
+
+	<view-state id="address" model="flow">
+		<on-entry>
+			<set name="viewScope.stateCodeList" value="stateCodeList" />
+		</on-entry>
+		<transition on="next" to="hobAndPersonal" />
+		<transition on="back" to="custName" validate="false" />
+	</view-state>
+
+	<view-state id="hobAndPersonal" view="HobbiesAndPersonalInfo.jsp"
+		model="flow">
+		<transition on="next" to="confirmation" />
+		<transition on="back" to="address" validate="false" />
+	</view-state>
+
+
+	<view-state id="confirmation" model="flow">
+		<transition on="next" to="payment" />
+		<transition on="changeAddress" to="address" />
+		<transition on="changeOrder" to="orderPizza" />
+		<transition on="back" to="hobAndPersonal" validate="false" />
+	</view-state>
+
+	<subflow-state id="payment" subflow="payment">
+		<input name="flow" />
+		<transition on="paymentSuccessful" to="receipt" />
+		<transition on="cancel" to="confirmation" />
+	</subflow-state>
+
+	<view-state id="receipt" model="flow">
+		<transition on="home" to="end" />
+	</view-state>
+
+	<end-state id="end" />
+</flow>

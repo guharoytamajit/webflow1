@@ -1,0 +1,30 @@
+body {
+	font-family: sans-serif;
+}
+
+#outerDiv {
+	width: 100%;
+}
+
+#mainDiv {
+	text-align: center;
+	margin: 0 auto;
+	width: 40%;
+}
+
+table,th,td {
+	border: 1px solid black;
+	padding: 2px;
+}
+
+#errors {
+	font-weight: bold;
+	color: red;
+}
+
+#codeRepo{
+	float: right;
+	right: 10px;
+	bottom: 10px;
+	position: fixed;
+}
